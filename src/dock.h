@@ -26,4 +26,21 @@ struct Ligand0
                                 // should belong to "Protein" structure
 };
 
+struct Protein0
+{
+  float x[MAXPRO];		// residue x coord                      used
+  float y[MAXPRO];		// residue y coord                      used
+  float z[MAXPRO];		// residue z coord                      used
+  int n[MAXPRO];		// effective point number               NOT USED
+  int t[MAXPRO];		// effective point type                 used
+  int c[MAXPRO];		// effective point class                used
+  int d[MAXPRO];		// redidue code                         used
+
+  int pnp;			// number of protein effective points   used
+  int pnr;			// number of protein residues           NOT USED
+
+  int r[MAXPRO];		// residue number                       replaced
+  int seq3[MAXPRO];		// aa sequence numbering                replaced
+};
+
 #endif /* DOCK_H */
