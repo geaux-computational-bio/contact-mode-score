@@ -15,6 +15,10 @@ Measure of protein-ligand complex similarity based on contacts
     $ cd data
     $ sh cms.sh
 
+## Dependencies
+
+    The codes have been tested on g++ 4.2.1
+
 
 ## To do
 
