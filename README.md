@@ -22,5 +22,7 @@ Measure of protein-ligand complex similarity based on contacts
 
 ## To do
 
-Currently only sdf format for ligand and pdb for protein are supported. Improvements include:
+Currently only sdf format for ligand and pdb for protein are supported.
+Improvements include:
+
 - To handle more formats, such mol2
