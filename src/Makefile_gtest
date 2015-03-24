@@ -75,7 +75,7 @@ gtest_main.a : gtest-all.o gtest_main.o
 # gtest_main.a, depending on whether it defines its own main()
 # function.
 
-OBJ_CPU := load.o data.o
+OBJ_CPU := load.o data.o util.o
 
 test.o : $(USER_DIR)/test.C $(GTEST_HEADERS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/test.C

@@ -3,10 +3,10 @@
 
 #include "dock.h"
 
-#define INVALID_CMS 1000.0
+#define INVALID_CMS 100.0
 
-
-int* initContactMatrix(const Ligand0 *mylig, const Protein0 *myprt, const EnePara0 *enepara);
+void initContactMatrix(int *ref_matrix, const Ligand0 *mylig,
+                       const Protein0 *myprt, const EnePara0 *enepara);
 
 float compareContacts(const int *ref1, const int *ref2, const int lna, const int pnp);
 

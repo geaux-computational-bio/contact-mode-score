@@ -73,6 +73,17 @@ pushProteinPoint (Protein0 * prt, int r, int n, int t, int d, int c)
   prt->pnp += 1;
 }
 
+
+static
+void
+pushLigandPoint (Ligand0 * lig, int n, string a, int t, float c)
+{
+  lig->n[n] = n;
+  lig->a[n] = a;
+  lig->t[n] = t;
+  lig->c[n] = c;
+}
+
 void
 loadLigandSdf(const string sdf_path, Ligand0 *mylig)
 {
@@ -135,6 +146,11 @@ loadLigandSdf(const string sdf_path, Ligand0 *mylig)
           tmp2[tmp4++] = atof(tmp6.c_str());
       }
     }
+  }
+
+  /* write the properties of each atom */
+  for (int i1 = 4; i1 < mylig->lna + 4; i1++) {
+    pushLigandPoint(mylig, i1 - 4, lines[i1].substr(31, 24).c_str(), tmp3[i1 - 4], tmp2[i1 - 4]);
   }
 }
 
@@ -366,4 +382,37 @@ loadProteinPdb(const string pdb_path, Protein0 *myprt)
       }
     }
   }
+}
+
+void
+loadPmf(const string para_path, EnePara0* enepara)
+{
+  
+  string line1;
+
+  ifstream d1_file(para_path);
+
+  if (!d1_file.is_open ()) {
+    cout << "cannot open energy parameter file" << endl;
+    cout << "Cannot open " << para_path << endl;
+  }
+
+  while (getline (d1_file, line1))
+    if (line1.length () > 3) {
+      if (line1.substr(0, 3) == "PMF") {
+	std::string dat1[5];
+
+	int dat2 = 0;
+
+	istringstream dat3 (line1);
+
+	while (dat3)
+	 dat3 >> dat1[dat2++];
+
+	enepara->pmf[getPntCode (dat1[1])][getLigCode (dat1[2])][0] =
+	  atof (dat1[3].c_str ());
+	enepara->pmf[getPntCode (dat1[1])][getLigCode (dat1[2])][1] =
+	  atof (dat1[4].c_str ());
+      }
+    }
 }

@@ -1,15 +1,15 @@
 CXX := g++
 
 
-OBJ_CPU := coords.o data.o main.o
+OBJ_CPU := data.o main.o load.o util.o
+CFLAGS := -O3
 
+%.o : %.C
+	$(CXX) $(CFLAGS) -c $<
 
-%.o: %.C
-	$(CXX) -c $<
-
-main : $(OBJ_CPU)
-	$(CXX) $^ -o $@
+cms : $(OBJ_CPU)
+	$(CXX) $(CFLAGS) $^ -o $@
 
 clean :
 	rm ./*.o
-	rm ./main
+	rm ./cms
