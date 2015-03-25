@@ -11,7 +11,6 @@ using namespace std;
 /*
   construct the contact mode matrix based on the protein-ligand
   interface;
-  return a pointer to the matrix with memory allocated
  */
 void
 initContactMatrix(int *ref_matrix, const Ligand0 *mylig, const Protein0 *myprt,
@@ -40,7 +39,6 @@ initContactMatrix(int *ref_matrix, const Ligand0 *mylig, const Protein0 *myprt,
 
 /*
   compare two contact matrices and calcuate the cms value;
-  will free the memory in ref1 and ref2.
  */
 float
 compareContacts(const int *ref1, const int *ref2, const int lna, const int pnp)
