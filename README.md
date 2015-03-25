@@ -17,12 +17,14 @@ Measure of protein-ligand complex similarity based on contacts
 
 ## Dependencies
 
-    The codes have been tested on g++ 4.2.1
+    The codes have been tested on g++ 4.2.1, but any compilers supporting c++ standard libraries should work.
 
 
-## To do
+## To-Do
 
 Currently only sdf format for ligand and pdb for protein are supported.
 Improvements include:
 
-- To handle more formats, such mol2
+- To calculate RMSD
+
+- To calculate the fraction of non-specific contacts
