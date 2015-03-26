@@ -19,9 +19,9 @@ int main(int argc, char *argv[])
   string prt1_path;
   string prt2_path;
 
-  int cms_flag;
-  int rmsd_flag;
-  int fraction_flag;
+  int cms_flag = 0;
+  int rmsd_flag = 0;
+  int fraction_flag = 0;
 
 
   int c;
