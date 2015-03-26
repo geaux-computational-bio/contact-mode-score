@@ -113,12 +113,12 @@ usage()
 
   cout << "To calculate contact mode score, use:\n";
   cout << "  biodiff -c --lig1 <first ligand> --prt1 <first protein>";
-  cout << "  --lig2 <second ligand> --prt2 <second protein>\n";
+  cout << "  --lig2 <second ligand> --prt2 <second protein>\n\n";
 
   cout << "To calculate rmsd, use:\n";
-  cout << "  biodiff -r --lig1 <first ligand> --lig2 <second ligand>\n";
+  cout << "  biodiff -r --lig1 <first ligand> --lig2 <second ligand>\n\n";
 
   cout << "To calculate fraction of non-specific contacts, use:\n";
   cout << "  biodiff -f --lig1 <first ligand> --prt1 <first protein>";
-  cout << "  --lig2 <second ligand> --prt2 <second protein>\n";
+  cout << "  --lig2 <second ligand> --prt2 <second protein>\n\n";
 }
