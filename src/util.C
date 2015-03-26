@@ -99,3 +99,26 @@ calculateContactModeScore(const Ligand0 *mylig1, const Protein0 *myprt1,
 
   return cms;
 }
+
+void
+usage()
+{
+  cout << "Usage: biodiff [options] files..." << endl;
+  cout << "Options:\n" << endl;
+  cout << "  -h, --help\t\t\tdisplay this help and exit\n";
+  cout << "  -c, --cms\t\t\tcalculate contact mode score\n";
+  cout << "  -r, --rmsd\t\t\tcalculate rmsd between two ligands\n";
+  cout << "  -f, --frac\t\t\tcalculate fraction of non-specific contacts\n";
+  cout << endl;
+
+  cout << "To calculate contact mode score, use:\n";
+  cout << "  biodiff -c --lig1 <first ligand> --prt1 <first protein>";
+  cout << "  --lig2 <second ligand> --prt2 <second protein>\n";
+
+  cout << "To calculate rmsd, use:\n";
+  cout << "  biodiff -r --lig1 <first ligand> --lig2 <second ligand>\n";
+
+  cout << "To calculate fraction of non-specific contacts, use:\n";
+  cout << "  biodiff -f --lig1 <first ligand> --prt1 <first protein>";
+  cout << "  --lig2 <second ligand> --prt2 <second protein>\n";
+}

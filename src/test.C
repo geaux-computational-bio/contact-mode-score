@@ -69,3 +69,8 @@ TEST (load, PMF)
 
   delete[] enepara;
 }
+
+TEST (biodiff, usage)
+{
+  usage();
+}

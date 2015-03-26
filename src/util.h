@@ -14,4 +14,6 @@ float calculateContactModeScore(const Ligand0 *mylig1, const Protein0 *myprt1,
                                 const Ligand0 *mylig2, const Protein0 *myprt2,
                                 const EnePara0 *enepara);
 
+void usage();
+
 #endif /* UTIL_H */
