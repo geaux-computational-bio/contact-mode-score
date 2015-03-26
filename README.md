@@ -1,30 +1,27 @@
-# cms
+# BioDiff
 
-Measure of protein-ligand complex similarity based on contacts
+Measure of protein-ligand complex (dis)similarity
 
 ## Installation
 
     $ cd src
-    $ make cms -f makefile
+    $ make biodiff -f makefile
 
 ## Usage
 
-    cms --lig1 <first ligand> --prt1 <first protein> --lig2 <second ligand> --prt2 <second protein>
+    $ biodiff --help
 
 ## Examples
     $ cd data
-    $ sh cms.sh
+    $ sh biodiff.sh
 
 ## Dependencies
 
-    The codes have been tested on g++ 4.2.1, but any compilers supporting c++ standard libraries should work.
+The codes have been tested on g++ 4.2.1, but any modern compilers supporting c++ standard libraries should work.
 
 
 ## To-Do
 
-Currently only sdf format for ligand and pdb for protein are supported.
 Improvements include:
-
-- To calculate RMSD
 
 - To calculate the fraction of non-specific contacts
