@@ -106,18 +106,14 @@ int main(int argc, char *argv[])
       exit (EXIT_FAILURE);
     }
 
-    Ligand0 *lig1 = new Ligand0[1];
-    Ligand0 *lig2 = new Ligand0[1];
-
-    loadLigandSdf(lig1_path, lig1);
-    loadLigandSdf(lig2_path, lig2);
+    Ligand0* lig1 = loadLigandSdf(lig1_path);
+    Ligand0* lig2 = loadLigandSdf(lig2_path);
 
     float rmsd = calcRmsd(lig1, lig2);
     printf("rmsd value:\t%f\n", rmsd);
 
-    delete[] lig1;
-    delete[] lig2;
-    
+    free(lig1);
+    free(lig2);
   }
 
   if (cms_flag || fraction_flag) {
@@ -131,19 +127,13 @@ int main(int argc, char *argv[])
       exit (EXIT_FAILURE);
     }
 
-    EnePara0 *enepara = new EnePara0[1];
-    Protein0 *prt1 = new Protein0[1];
-    Ligand0 *lig1 = new Ligand0[1];
-    Protein0 *prt2 = new Protein0[1];
-    Ligand0 *lig2 = new Ligand0[1];
-
-    loadProteinPdb(prt1_path, prt1);
-    loadLigandSdf(lig1_path, lig1);
-    loadProteinPdb(prt2_path, prt2);
-    loadLigandSdf(lig2_path, lig2);
-
     string para_path = "../data/paras";
-    loadPmf(para_path, enepara);
+    EnePara0 *enepara = loadPmf(para_path);
+
+    Protein0* prt1 = loadProteinPdb(prt1_path);
+    Protein0* prt2 = loadProteinPdb(prt2_path);
+    Ligand0* lig1 = loadLigandSdf(lig1_path);
+    Ligand0* lig2 = loadLigandSdf(lig2_path);
   
     if (cms_flag) {
       float cms = calculateContactModeScore(lig1, prt1, lig2, prt2, enepara);
@@ -154,12 +144,11 @@ int main(int argc, char *argv[])
       cout << "calculate fraction:\n";
     }
 
-    delete[] prt1;
-    delete[] lig1;
-    delete[] lig2;
-    delete[] prt2;
-    delete[] enepara;
-    
+    free(prt1);
+    free(prt2);
+    free(lig1);
+    free(lig2);
+    free(enepara);
   }
 
   return 0;

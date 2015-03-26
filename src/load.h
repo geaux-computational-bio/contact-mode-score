@@ -7,10 +7,10 @@
 
 using namespace std;
 
-void loadLigandSdf(const string sdf_path, Ligand0 *lig);
+Ligand0* loadLigandSdf(const string sdf_path);
 
-void loadProteinPdb(const string pdb_path, Protein0 *prt);
+Protein0* loadProteinPdb(const string pdb_path);
 
-void loadPmf(const string para_path, EnePara0* enepara);
+EnePara0* loadPmf(const string para_path);
 
 #endif /* LOAD_H */
