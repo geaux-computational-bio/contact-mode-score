@@ -63,4 +63,10 @@ struct EnePara0
   float b_para[MAXWEI];         // the b parameter in normalization
 };
 
+struct ContactScore
+{
+  float cms;
+  float frac;
+};
+
 #endif /* DOCK_H */

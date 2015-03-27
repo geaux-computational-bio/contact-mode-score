@@ -134,14 +134,15 @@ int main(int argc, char *argv[])
     Protein0* prt2 = loadProteinPdb(prt2_path);
     Ligand0* lig1 = loadLigandSdf(lig1_path);
     Ligand0* lig2 = loadLigandSdf(lig2_path);
+
+    ContactScore cnt = calculateContactScore(lig1, prt1, lig2, prt2, enepara);
   
     if (cms_flag) {
-      float cms = calculateContactModeScore(lig1, prt1, lig2, prt2, enepara);
-      printf("cms value:\t%f\n", cms);
+      printf("cms value:\t%f\n", cnt.cms);
     }
 
     if (fraction_flag) {
-      cout << "calculate fraction:\n";
+      printf("fraction value:\t%f\n", cnt.frac);
     }
 
     free(prt1);
