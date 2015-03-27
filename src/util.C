@@ -45,11 +45,16 @@ compareContacts(const int *ref1, const int *ref2, const int lna, const int pnp)
   int fp = 0;
   int tn = 0;
 
+  int* active_prt_pts = (int*) calloc(pnp, sizeof(int));
 
   for (int l = 0; l < lna; l++) {
     for (int p = 0; p < pnp; p++) {
       const int ref_val1 = ref1[l * pnp + p];
       const int ref_val2 = ref2[l * pnp + p];
+
+      if (ref_val1 == 1) {
+        active_prt_pts[p] = 1;
+      }
 
       tp += (ref_val1 == 1 && ref_val2 == 1);
       fn += (ref_val1 == 1 && ref_val2 == 0);
@@ -57,6 +62,27 @@ compareContacts(const int *ref1, const int *ref2, const int lna, const int pnp)
       tn += (ref_val1 == 0 && ref_val2 == 0);
     }
   }
+
+  int conf_non_spec_cncts = 0;
+  int native_non_spec_cncts = 0;
+
+  for (int p = 0; p < pnp; p++) {
+    if (active_prt_pts[p]) {
+      for (int l = 0; l < lna; l++) {
+
+        const int ref_val1 = ref1[l * pnp + p];
+        const int ref_val2 = ref2[l * pnp + p];
+
+        if (ref_val1)
+          native_non_spec_cncts += 1;
+        if (ref_val2)
+          conf_non_spec_cncts += 1;
+      }
+    }
+  }
+
+  float frac = (float) conf_non_spec_cncts / (float) native_non_spec_cncts;
+  free(active_prt_pts);
 
   double d_tp = (double) tp;
   double d_fn = (double) fn ;
@@ -71,8 +97,6 @@ compareContacts(const int *ref1, const int *ref2, const int lna, const int pnp)
   
   if (tmp != 0.)
     cms = (d_tp * d_tn - d_fp * d_fn) / sqrtf(tmp);
-
-  float frac = (float) tp / (float) (tp + fn);
 
   ContactScore cnt;
   cnt.cms = (float) cms;
