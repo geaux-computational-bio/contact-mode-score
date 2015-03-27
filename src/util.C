@@ -45,16 +45,18 @@ compareContacts(const int *ref1, const int *ref2, const int lna, const int pnp)
   int fp = 0;
   int tn = 0;
 
-  int* active_prt_pts = (int*) calloc(pnp, sizeof(int));
+  int* active_native_prt_pts = (int*) calloc(pnp, sizeof(int));
+  int* active_conf_prt_pts = (int*) calloc(pnp, sizeof(int));
 
   for (int l = 0; l < lna; l++) {
     for (int p = 0; p < pnp; p++) {
       const int ref_val1 = ref1[l * pnp + p];
       const int ref_val2 = ref2[l * pnp + p];
 
-      if (ref_val1 == 1) {
-        active_prt_pts[p] = 1;
-      }
+      if (ref_val1 == 1)
+        active_native_prt_pts[p] = 1;
+      if (ref_val2 == 1)
+        active_conf_prt_pts[p] = 1;
 
       tp += (ref_val1 == 1 && ref_val2 == 1);
       fn += (ref_val1 == 1 && ref_val2 == 0);
@@ -63,32 +65,25 @@ compareContacts(const int *ref1, const int *ref2, const int lna, const int pnp)
     }
   }
 
-  int conf_non_spec_cncts = 0;
-  int native_non_spec_cncts = 0;
-
+  int native_cnts = 0, both_cnts = 0;
   for (int p = 0; p < pnp; p++) {
-    if (active_prt_pts[p]) {
-      for (int l = 0; l < lna; l++) {
-
-        const int ref_val1 = ref1[l * pnp + p];
-        const int ref_val2 = ref2[l * pnp + p];
-
-        if (ref_val1)
-          native_non_spec_cncts += 1;
-        if (ref_val2)
-          conf_non_spec_cncts += 1;
-      }
+    if (active_native_prt_pts[p]) {
+      native_cnts += 1;
+      if (active_conf_prt_pts[p])
+        both_cnts += 1;
     }
   }
+  free(active_native_prt_pts);
+  free(active_conf_prt_pts);
 
-  float frac = (float) conf_non_spec_cncts / (float) native_non_spec_cncts;
-  free(active_prt_pts);
+  // fraction of non-specific contacts
+  float frac = (float) both_cnts / (float) native_cnts;
 
+  // contact mode score
   double d_tp = (double) tp;
   double d_fn = (double) fn ;
   double d_fp = (double) fp ;
   double d_tn = (double) tn ; 
-
 
   double cms = INVALID_CMS;
 

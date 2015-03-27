@@ -12,4 +12,4 @@ biodiff : $(OBJ_CPU)
 
 clean :
 	rm ./*.o
-	rm ./cms
+	rm ./biodiff
