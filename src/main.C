@@ -101,7 +101,7 @@ int main(int argc, char *argv[])
 
   if (rmsd_flag) {
     if (lig1_path.empty() || lig2_path.empty()) {
-      cout << "not enough arguments!" << endl;
+      cout << "Wrong arguments!" << endl;
       usage();
       exit (EXIT_FAILURE);
     }
@@ -122,7 +122,7 @@ int main(int argc, char *argv[])
         || lig2_path.empty()
         || prt1_path.empty()
         || prt2_path.empty()) {
-      cout << "not enough arguments!" << endl;
+      cout << "Wrong arguments!" << endl;
       usage();
       exit (EXIT_FAILURE);
     }
