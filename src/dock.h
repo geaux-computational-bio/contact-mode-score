@@ -25,7 +25,7 @@ struct Ligand0
 
   float pocket_center[3];	// pocket center                        used
                                 // should belong to "Protein" structure
-  std::string a[MAXLIG];	// atom name                            NOT USED
+  /* std::string a[MAXLIG];	// atom name                            NOT USED */
 };
 
 struct Protein0

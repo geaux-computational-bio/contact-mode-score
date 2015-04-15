@@ -1,5 +1,6 @@
 #include <vector>
 #include <string>
+#include <cstring>
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -15,7 +16,7 @@ readLigandSdfSections(const string sdf_path)
 {
   vector < vector < string > > sections;
   string line;
-  ifstream file(sdf_path);
+  ifstream file(sdf_path.c_str());
 
   if (!file.is_open()) {
     cout << "Error opening file " << sdf_path << endl;
@@ -41,7 +42,7 @@ readProteinPdbSections(const string pdb_path)
 {
   vector < vector < string > > sections;
   string line;
-  ifstream file(pdb_path);
+  ifstream file(pdb_path.c_str());
 
   if (!file.is_open()) {
     cout << "Error opening file " << pdb_path << endl;
@@ -79,10 +80,9 @@ pushProteinPoint (Protein0 * prt, int r, int n, int t, int d, int c)
 
 static
 void
-pushLigandPoint (Ligand0 * lig, int n, string a, int t, float c)
+pushLigandPoint (Ligand0 * lig, int n, int t, float c)
 {
   lig->n[n] = n;
-  lig->a[n] = a;
   lig->t[n] = t;
   lig->c[n] = c;
 }
@@ -92,6 +92,7 @@ loadLigandSdf(const string sdf_path)
 {
   vector < vector < string > > sects = readLigandSdfSections(sdf_path);
   assert(sects.size() > 0);
+
 
   int num_lig = 1; 
   Ligand0* mylig = (Ligand0*) calloc(num_lig, sizeof(Ligand0));
@@ -163,7 +164,7 @@ loadLigandSdf(const string sdf_path)
 
   /* write the properties of each atom */
   for (int i1 = 4; i1 < mylig->lna + 4; i1++) {
-    pushLigandPoint(mylig, i1 - 4, lines[i1].substr(31, 24).c_str(), tmp3[i1 - 4], tmp2[i1 - 4]);
+    pushLigandPoint(mylig, i1 - 4, tmp3[i1 - 4], tmp2[i1 - 4]);
   }
 
   return mylig;
@@ -417,7 +418,7 @@ loadPmf(const string para_path)
   
   string line1;
 
-  ifstream d1_file(para_path);
+  ifstream d1_file(para_path.c_str());
 
   if (!d1_file.is_open ()) {
     cout << "cannot open energy parameter file" << endl;
