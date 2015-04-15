@@ -1,19 +1,19 @@
-# BioDiff
+# Contact Mode Score (CMS)
 
-Measure of protein-ligand complex (dis)similarity
+Measure of protein-ligand complex (dis)similarity based on intermolecular contacts
 
 ## Installation
 
     $ cd src
-    $ make biodiff -f makefile
+    $ make cms -f makefile
 
 ## Usage
 
-    $ biodiff --help
+    $ cms --help
 
 ## Examples
     $ cd data
-    $ sh biodiff.sh
+    $ sh cms.sh
 
 ## Dependencies
 

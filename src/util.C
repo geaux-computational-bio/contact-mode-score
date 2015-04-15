@@ -127,7 +127,7 @@ calculateContactScore(const Ligand0 *mylig1, const Protein0 *myprt1,
 void
 usage()
 {
-  cout << "Usage: biodiff [options] files..." << endl << endl;;
+  cout << "Usage: cms [options] files..." << endl << endl;;
   cout << "Note that multiple options may follow a hyphen delimiter in a single token,\n-cr is equivalent with -c -r" << endl << endl;
 
   cout << "Options:\n" << endl;
@@ -138,14 +138,14 @@ usage()
   cout << endl;
 
   cout << "To calculate contact mode score, use:\n";
-  cout << "  biodiff -c --lig1 <first ligand> --prt1 <first protein>";
+  cout << "  cms -c --lig1 <first ligand> --prt1 <first protein>";
   cout << "  --lig2 <second ligand> --prt2 <second protein>\n\n";
 
   cout << "To calculate rmsd, use:\n";
-  cout << "  biodiff -r --lig1 <first ligand> --lig2 <second ligand>\n\n";
+  cout << "  cms -r --lig1 <first ligand> --lig2 <second ligand>\n\n";
 
   cout << "To calculate fraction of non-specific contacts, \n";
   cout << "PLEASE USE NATIVE ligand and NATIVE protein for the arguments of lig1 and prt1:" << endl;
-  cout << "  biodiff -f --lig1 <native ligand> --prt1 <native protein>";
+  cout << "  cms -f --lig1 <native ligand> --prt1 <native protein>";
   cout << "  --lig2 <second ligand> --prt2 <second protein>\n\n";
 }

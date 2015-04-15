@@ -70,7 +70,7 @@ TEST (load, PMF)
   delete[] enepara;
 }
 
-TEST (biodiff, usage)
+TEST (cms, usage)
 {
   usage();
 }

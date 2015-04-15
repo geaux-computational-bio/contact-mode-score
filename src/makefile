@@ -7,9 +7,9 @@ CFLAGS := -O3 -Wall
 %.o : %.C
 	$(CXX) $(CFLAGS) -c $<
 
-biodiff : $(OBJ_CPU)
+cms : $(OBJ_CPU)
 	$(CXX) $(CFLAGS) $^ -o $@
 
 clean :
 	rm ./*.o
-	rm ./biodiff
+	rm ./cms
