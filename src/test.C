@@ -39,35 +39,32 @@ void printProtein(const Protein0 *prt)
 
 TEST (load, Ligand)
 {
-  Ligand0* lig = new Ligand0[1];
+  // Ligand0* lig = new Ligand0[1];
 
   string sdf_path = "../data/1a07C1.sdf";
-  loadLigandSdf(sdf_path, lig);
+  Ligand0* lig = loadLigandSdf(sdf_path);
   // printLigand(lig);
 
-  delete[] lig;
+  free(lig);
 }
 
 TEST (load, Protein)
 {
-  Protein0 *prt = new Protein0[1];
-  loadProteinPdb("../data/1a07C.pdb", prt);
+  Protein0 *prt = loadProteinPdb("../data/1a07C.pdb");
   EXPECT_EQ(prt->t[4], 20);
   EXPECT_EQ(prt->t[10], 5);
   EXPECT_EQ(prt->t[19], 27);
   // printProtein(prt);
 
-  delete[] prt;
+  free(prt);
 }
 
 TEST (load, PMF)
 {
   string para_path = "../data/paras";
-  EnePara0 *enepara = new EnePara0[1];
+  EnePara0 *enepara = loadPmf(para_path);
 
-  loadPmf(para_path, enepara);
-
-  delete[] enepara;
+  free(enepara);
 }
 
 TEST (cms, usage)
