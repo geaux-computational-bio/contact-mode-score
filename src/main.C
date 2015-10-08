@@ -123,7 +123,7 @@ int main(int argc, char *argv[]) {
             exit (EXIT_FAILURE);
         }
 
-        string para_path = "../data/paras";
+        string para_path = getenv("GEAUX_FF");
         EnePara0 *enepara = loadPmf(para_path);
 
         Protein0* prt1 = loadProteinPdb(prt1_path);
