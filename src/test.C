@@ -1,6 +1,7 @@
 #include <iostream>
 #include <assert.h>
 #include <stdio.h>
+#include <cmath>
 
 #include "gtest/gtest.h"
 #include "gtest/internal/gtest-internal.h"
@@ -62,6 +63,23 @@ TEST (load, PMF) {
     free(enepara);
 }
 
-TEST (cms, usage) {
-    usage();
+TEST(calculate, MCC) {
+  int tp = 0, fn = 0, fp = 0;
+  int tn = 10;
+
+  double d_tp = (double) tp;
+  double d_fn = (double) fn ;
+  double d_fp = (double) fp ;
+  double d_tn = (double) tn ;
+
+  double tmp = (d_tp + d_fp) * (d_tp + d_fn) *
+    (d_tn + d_fp) * (d_tn + d_fn);
+
+  double cms = 0.0;
+  if (tmp != 0.)
+    cms = (d_tp * d_tn - d_fp * d_fn) / sqrtf(tmp);
+
+  EXPECT_EQ(cms, 0.0);
 }
+
+

@@ -3,7 +3,7 @@
 
 #include "dock.h"
 
-#define INVALID_CMS 100.0
+const double INVALID_CMS = 0.0;
 
 void initContactMatrix(int *ref_matrix, const Ligand0 *mylig,
                        const Protein0 *myprt, const EnePara0 *enepara);
