@@ -385,7 +385,7 @@ loadProteinPdb(const string pdb_path) {
                     }
                 }
 
-            } else if (line.substr(0, 6) == "ENDMDL") {
+            } else if (line.substr(0, 6) == "ENDMDL" || line.substr(0, 3) == "TER") {
                 if (tn1 > 0.0) {
                     tx1 /= tn1;
                     ty1 /= tn1;
