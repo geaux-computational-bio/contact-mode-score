@@ -50,7 +50,8 @@ readProteinPdbSections(const string pdb_path) {
     vector < string > one_section;
     while(getline(file, line)) {
         one_section.push_back(line);
-        if (line.compare("ENDMDL") == 0) {
+        if (line.compare("ENDMDL") == 0 ||
+            line.compare("TER") == 0) {
             sections.push_back(one_section);
             one_section.clear();
         }
