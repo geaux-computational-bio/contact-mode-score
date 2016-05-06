@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Contact-mode-score by geaux-computational-bio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Contact-mode-score</h1>
+      <h2 class="project-tagline"></h2>
+      <a href="https://github.com/geaux-computational-bio/contact-mode-score" class="btn">View on GitHub</a>
+      <a href="https://github.com/geaux-computational-bio/contact-mode-score/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/geaux-computational-bio/contact-mode-score/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <ul>
+<li>
+<a href="#sec-1">Contact Mode Score (CMS)</a>
+
+<ul>
+<li><a href="#sec-1-1">Installation</a></li>
+<li><a href="#sec-1-2">Usage</a></li>
+<li><a href="#sec-1-3">Examples</a></li>
+<li><a href="#sec-1-4">Dependencies</a></li>
+</ul>
+</li>
+<li>
+<a href="#sec-2">eXtended Contact Mode Score (XCMS)</a>
+
+<ul>
+<li>
+<a href="#sec-2-1">Installation Dependencies</a>
+
+<ul>
+<li><a href="#sec-2-1-1">Python 2.7 and pip</a></li>
+<li><a href="#sec-2-1-2">OpenBabel and Pybel</a></li>
+<li><a href="#sec-2-1-3">Pkcombu</a></li>
+<li><a href="#sec-2-1-4">APoc</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-2">Installation</a></li>
+<li><a href="#sec-2-3">Usage</a></li>
+</ul>
+</li>
+</ul>
+
+<h1>
+<a id="contact-mode-score-cms" class="anchor" href="#contact-mode-score-cms" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contact Mode Score (CMS)<a id="orgheadline5"></a>
+</h1>
+
+<p>Measure of protein-ligand complex (dis)similarity based on intermolecular
+contacts</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation<a id="orgheadline1"></a>
+</h2>
+
+<p>Download the package, unpack the tarball, go to <code>src</code>, and
+run <code>make</code>:</p>
+
+<div class="highlight highlight-source-shell"><pre>$ <span class="pl-c1">cd</span> src
+$ make cms -f makefile</pre></div>
+
+<p>If successful, the binary <code>cms</code> will show up in <code>bin</code>:</p>
+
+<div class="highlight highlight-source-shell"><pre>$ ls ../bin
+cms</pre></div>
+
+<p>Append the path of <code>cms</code> to the <code>PATH</code> environment variable</p>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage<a id="orgheadline2"></a>
+</h2>
+
+<div class="highlight highlight-source-shell"><pre>$ cms -h
+Usage: cms [options] files...
+
+Note that multiple options may follow a hyphen delimiter <span class="pl-k">in</span> a single token,
+-cr is equivalent with -c -r
+
+Options:
+
+-h, --help      display this <span class="pl-c1">help</span> and <span class="pl-c1">exit</span>
+-c, --cms     calculate contact mode score
+-r, --rmsd      calculate rmsd between two ligands
+-f, --frac      calculate fraction of non-specific contacts
+
+To calculate contact mode score, use:
+cms -c --lig1 <span class="pl-k">&lt;</span>first ligand<span class="pl-k">&gt;</span> --prt1 <span class="pl-k">&lt;</span>first protein<span class="pl-k">&gt;</span>  --lig2 <span class="pl-k">&lt;</span>second ligand<span class="pl-k">&gt;</span> --prt2 <span class="pl-k">&lt;</span>second protein<span class="pl-k">&gt;</span>
+
+To calculate rmsd, use:
+cms -r --lig1 <span class="pl-k">&lt;</span>first ligand<span class="pl-k">&gt;</span> --lig2 <span class="pl-k">&lt;</span>second ligand<span class="pl-k">&gt;</span>
+
+To calculate fraction of non-specific contacts, 
+PLEASE USE NATIVE ligand and NATIVE protein <span class="pl-k">for</span> the arguments of lig1 and prt1:
+cms -f --lig1 <span class="pl-k">&lt;</span>native ligand<span class="pl-k">&gt;</span> --prt1 <span class="pl-k">&lt;</span>native protein<span class="pl-k">&gt;</span>  --lig2 <span class="pl-k">&lt;</span>second ligand<span class="pl-k">&gt;</span> --prt2 <span class="pl-k">&lt;</span>second protein<span class="pl-k">&gt;</span></pre></div>
+
+<h2>
+<a id="examples" class="anchor" href="#examples" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Examples<a id="orgheadline3"></a>
+</h2>
+
+<div class="highlight highlight-source-shell"><pre>$ <span class="pl-c1">cd</span> data
+$ sh cms.sh</pre></div>
+
+<h2>
+<a id="dependencies" class="anchor" href="#dependencies" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dependencies<a id="orgheadline4"></a>
+</h2>
+
+<p>The codes have been tested on g++ 4.2.1, but any modern compilers supporting c++
+standard libraries should work.</p>
+
+<h1>
+<a id="extended-contact-mode-score-xcms" class="anchor" href="#extended-contact-mode-score-xcms" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>eXtended Contact Mode Score (XCMS)<a id="orgheadline13"></a>
+</h1>
+
+<p>Compare two protein-ligand binding conformations even when they are
+non-identical systems using <strong>eXtended Contact Mode Score (XCMS)</strong></p>
+
+<h2>
+<a id="installation-dependencies" class="anchor" href="#installation-dependencies" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation Dependencies<a id="orgheadline10"></a>
+</h2>
+
+<h3>
+<a id="python-27-and-pip" class="anchor" href="#python-27-and-pip" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Python 2.7 and pip<a id="orgheadline6"></a>
+</h3>
+
+<p>It is recommended to install <a href="https://www.continuum.io/downloads">Anaconda</a> on your system to set up the python
+working environment, which provides most of the python dependencies to run XCMS,
+except for Pybel, whose installation shall be explained below.</p>
+
+<h3>
+<a id="openbabel-and-pybel" class="anchor" href="#openbabel-and-pybel" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>OpenBabel and Pybel<a id="orgheadline7"></a>
+</h3>
+
+<p>We use <a href="http://openbabel.org/wiki/Main_Page">OpenBabel</a> and its python binding <a href="https://openbabel.org/docs/dev/UseTheLibrary/Python_Pybel.html">pybel</a> to handle various input formats.</p>
+
+<p>See <a href="https://openbabel.org/docs/dev/Installation/install.html#compiling-open-babel">here</a> for the instructions how you can compile OpenBabel together with its
+python binding.</p>
+
+<p>Be aware, you must use the old <a href="http://eigen.tuxfamily.org/index.php?title=Eigen2">Eigen2 </a>instead of Eigen3.</p>
+
+<h3>
+<a id="pkcombu" class="anchor" href="#pkcombu" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Pkcombu<a id="orgheadline8"></a>
+</h3>
+
+<p>We use <a href="http://strcomp.protein.osaka-u.ac.jp/kcombu/doc/README_pkcombu.html">pkcombu</a> in the KCOMBU package to compare two ligands.</p>
+
+<p>You may download the KCOMBU program <a href="http://strcomp.protein.osaka-u.ac.jp/kcombu/download_src.html">here</a>.</p>
+
+<p>Please add the <code>pkcombu</code> into your system's <code>PATH</code> variable.</p>
+
+<h3>
+<a id="apoc" class="anchor" href="#apoc" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>APoc<a id="orgheadline9"></a>
+</h3>
+
+<p>We use Apoc to compare two binding pockets.</p>
+
+<p>You may donwload Apoc program <a href="http://cssb.biology.gatech.edu/APoc">here</a>.</p>
+
+<p>Please add the <code>apoc</code> into your system's <code>PATH</code> variable.</p>
+
+<h2>
+<a id="installation-1" class="anchor" href="#installation-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation<a id="orgheadline11"></a>
+</h2>
+
+<p>At the command line:</p>
+
+<div class="highlight highlight-source-shell"><pre>$ pip install xcms</pre></div>
+
+<p>To install locally only for yourself:</p>
+
+<div class="highlight highlight-source-shell"><pre>$ pip install xcms --user</pre></div>
+
+<h2>
+<a id="usage-1" class="anchor" href="#usage-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage<a id="orgheadline12"></a>
+</h2>
+
+<p>To use it:</p>
+
+<div class="highlight highlight-source-shell"><pre>$ x-cms --help
+Usage: x-cms [OPTIONS]
+
+calculated extended contact mode score provided the query and template
+protein-ligand structures
+
+Options:
+  --template-protein PATH  template protein file path, <span class="pl-k">in</span> PDB format
+  --query-protein PATH     query protein file path, <span class="pl-k">in</span> PDB format
+  --query-ligand PATH      query ligand file path, <span class="pl-k">in</span> SDF format
+  --template-ligand PATH   template ligand file path, <span class="pl-k">in</span> SDF format
+  --help                   Show this message and <span class="pl-c1">exit</span>.</pre></div>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/geaux-computational-bio/contact-mode-score">Contact-mode-score</a> is maintained by <a href="https://github.com/geaux-computational-bio">geaux-computational-bio</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
