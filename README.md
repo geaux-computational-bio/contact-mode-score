@@ -48,7 +48,7 @@ Note that multiple options may follow a hyphen delimiter in a single token,
 Options:
 
 -h, --help      display this help and exit
--c, --cms     calculate contact mode score
+-c, --cms       calculate contact mode score
 -r, --rmsd      calculate rmsd between two ligands
 -f, --frac      calculate fraction of non-specific contacts
 

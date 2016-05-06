@@ -28,7 +28,7 @@ Append the path of ~cms~ to the ~PATH~ environment variable
   Options:
 
   -h, --help      display this help and exit
-  -c, --cms     calculate contact mode score
+  -c, --cms       calculate contact mode score
   -r, --rmsd      calculate rmsd between two ligands
   -f, --frac      calculate fraction of non-specific contacts
 
