@@ -128,7 +128,7 @@ usage() {
 
     cout << "Options:\n" << endl;
     cout << "  -h, --help\t\t\tdisplay this help and exit\n";
-    cout << "  -c, --cms\t\t\tcalculate contact mode score\n";
+    cout << "  -c, --cms\t\t\t\tcalculate contact mode score\n";
     cout << "  -r, --rmsd\t\t\tcalculate rmsd between two ligands\n";
     cout << "  -f, --frac\t\t\tcalculate fraction of non-specific contacts\n";
     cout << endl;
