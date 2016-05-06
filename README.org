@@ -1,0 +1,115 @@
+* Contact Mode Score (CMS)
+
+Measure of protein-ligand complex (dis)similarity based on intermolecular
+contacts
+
+** Installation
+Download the package, unpack the tarball, go to ~src~, and
+run ~make~:
+#+BEGIN_SRC sh
+  $ cd src
+  $ make cms -f makefile
+#+END_SRC
+If successful, the binary ~cms~ will show up in ~bin~:
+#+BEGIN_SRC sh
+  $ ls ../bin
+  cms
+#+END_SRC
+Append the path of ~cms~ to the ~PATH~ environment variable
+
+** Usage
+#+BEGIN_SRC sh
+  $ cms -h
+  Usage: cms [options] files...
+
+  Note that multiple options may follow a hyphen delimiter in a single token,
+  -cr is equivalent with -c -r
+
+  Options:
+
+  -h, --help      display this help and exit
+  -c, --cms     calculate contact mode score
+  -r, --rmsd      calculate rmsd between two ligands
+  -f, --frac      calculate fraction of non-specific contacts
+
+  To calculate contact mode score, use:
+  cms -c --lig1 <first ligand> --prt1 <first protein>  --lig2 <second ligand> --prt2 <second protein>
+
+  To calculate rmsd, use:
+  cms -r --lig1 <first ligand> --lig2 <second ligand>
+
+  To calculate fraction of non-specific contacts, 
+  PLEASE USE NATIVE ligand and NATIVE protein for the arguments of lig1 and prt1:
+  cms -f --lig1 <native ligand> --prt1 <native protein>  --lig2 <second ligand> --prt2 <second protein>
+#+END_SRC
+
+** Examples
+#+BEGIN_SRC sh
+  $ cd data
+  $ sh cms.sh
+#+END_SRC
+
+** Dependencies
+The codes have been tested on g++ 4.2.1, but any modern compilers supporting c++
+standard libraries should work.
+
+* eXtended Contact Mode Score (XCMS)
+
+Compare two protein-ligand binding conformations even when they are
+non-identical systems using *eXtended Contact Mode Score (XCMS)*
+
+** Installation Dependencies
+
+*** Python 2.7 and pip
+It is recommended to install [[https://www.continuum.io/downloads][Anaconda]] on your system to set up the python
+working environment, which provides most of the python dependencies to run XCMS,
+except for Pybel, whose installation shall be explained below.
+
+*** OpenBabel and Pybel
+We use [[http://openbabel.org/wiki/Main_Page][OpenBabel]] and its python binding [[https://openbabel.org/docs/dev/UseTheLibrary/Python_Pybel.html][pybel]] to handle various input formats.
+
+See [[https://openbabel.org/docs/dev/Installation/install.html#compiling-open-babel][here]] for the instructions how you can compile OpenBabel together with its
+python binding.
+
+Be aware, you must use the old [[http://eigen.tuxfamily.org/index.php?title=Eigen2][Eigen2 ]]instead of Eigen3.
+
+*** Pkcombu
+We use [[http://strcomp.protein.osaka-u.ac.jp/kcombu/doc/README_pkcombu.html][pkcombu]] in the KCOMBU package to compare two ligands.
+
+You may download the KCOMBU program [[http://strcomp.protein.osaka-u.ac.jp/kcombu/download_src.html][here]].
+
+Please add the ~pkcombu~ into your system's ~PATH~ variable.
+
+*** APoc
+We use Apoc to compare two binding pockets.
+
+You may donwload Apoc program [[http://cssb.biology.gatech.edu/APoc][here]].
+
+Please add the ~apoc~ into your system's ~PATH~ variable.
+
+** Installation
+At the command line:
+#+BEGIN_SRC sh
+  $ pip install xcms
+#+END_SRC
+To install locally only for yourself:
+#+BEGIN_SRC sh
+  $ pip install xcms --user
+#+END_SRC
+
+** Usage
+To use it:
+#+BEGIN_SRC sh
+  $ x-cms --help
+  Usage: x-cms [OPTIONS]
+
+  calculated extended contact mode score provided the query and template
+  protein-ligand structures
+
+  Options:
+    --template-protein PATH  template protein file path, in PDB format
+    --query-protein PATH     query protein file path, in PDB format
+    --query-ligand PATH      query ligand file path, in SDF format
+    --template-ligand PATH   template ligand file path, in SDF format
+    --help                   Show this message and exit.
+#+END_SRC

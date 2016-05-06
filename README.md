@@ -19,7 +19,7 @@ contacts
 
 ## Installation<a id="orgheadline1"></a>
 
-Download the package, unpack the tarball, go to `contact-mode-score/src`, and
+Download the package, unpack the tarball, go to `src`, and
 run `make`:
 
 ```sh
@@ -27,20 +27,40 @@ $ cd src
 $ make cms -f makefile
 ```
 
-If successful, the binary `cms` will show up in `contact-mode-score/bin`:
+If successful, the binary `cms` will show up in `bin`:
 
 ```sh
 $ ls ../bin
-
 cms
 ```
 
-Add the path of `cms` to the `PATH` environment variable, like:
+Append the path of `cms` to the `PATH` environment variable
 
 ## Usage<a id="orgheadline2"></a>
 
 ```sh
 $ cms -h
+Usage: cms [options] files...
+
+Note that multiple options may follow a hyphen delimiter in a single token,
+-cr is equivalent with -c -r
+
+Options:
+
+-h, --help      display this help and exit
+-c, --cms     calculate contact mode score
+-r, --rmsd      calculate rmsd between two ligands
+-f, --frac      calculate fraction of non-specific contacts
+
+To calculate contact mode score, use:
+cms -c --lig1 <first ligand> --prt1 <first protein>  --lig2 <second ligand> --prt2 <second protein>
+
+To calculate rmsd, use:
+cms -r --lig1 <first ligand> --lig2 <second ligand>
+
+To calculate fraction of non-specific contacts, 
+PLEASE USE NATIVE ligand and NATIVE protein for the arguments of lig1 and prt1:
+cms -f --lig1 <native ligand> --prt1 <native protein>  --lig2 <second ligand> --prt2 <second protein>
 ```
 
 ## Examples<a id="orgheadline3"></a>
