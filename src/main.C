@@ -2,6 +2,7 @@
 #include <getopt.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/time.h>
 
 #include "dock.h"
 #include "load.h"
@@ -95,6 +96,8 @@ int main(int argc, char *argv[]) {
         }
     }
 
+    unsigned long int N = 10000000;
+
     if (rmsd_flag) {
         if (lig1_path.empty() || lig2_path.empty()) {
             cout << "Wrong arguments!" << endl;
@@ -105,8 +108,22 @@ int main(int argc, char *argv[]) {
         Ligand0* lig1 = loadLigandSdf(lig1_path);
         Ligand0* lig2 = loadLigandSdf(lig2_path);
 
-        float rmsd = calcRmsd(lig1, lig2);
-        printf("rmsd value:\t%f\n", rmsd);
+        struct timeval tval_before, tval_after, tval_result;
+
+        gettimeofday(&tval_before, NULL);
+
+        // Some code you want to time, for example:
+        unsigned long int i = 0;
+        for (i = 0; i < N; i++) {
+          float rmsd = calcRmsd(lig1, lig2);
+        }
+
+        gettimeofday(&tval_after, NULL);
+
+        timersub(&tval_after, &tval_before, &tval_result);
+
+        printf("Time elapsed in calculating rmsd: %ld.%06ld\n",
+               (long int)tval_result.tv_sec, (long int)tval_result.tv_usec);
 
         free(lig1);
         free(lig2);
@@ -131,15 +148,22 @@ int main(int argc, char *argv[]) {
         Ligand0* lig1 = loadLigandSdf(lig1_path);
         Ligand0* lig2 = loadLigandSdf(lig2_path);
 
-        ContactScore cnt = calculateContactScore(lig1, prt1, lig2, prt2, enepara);
+        struct timeval tval_before, tval_after, tval_result;
 
-        if (cms_flag) {
-            printf("cms value:\t%f\n", cnt.cms);
+        gettimeofday(&tval_before, NULL);
+
+        // Some code you want to time, for example:
+        unsigned long int i = 0;
+        for (i = 0; i < N; i++) {
+          ContactScore cnt = calculateContactScore(lig1, prt1, lig2, prt2, enepara);
         }
 
-        if (fraction_flag) {
-            printf("fraction value:\t%f\n", cnt.frac);
-        }
+        gettimeofday(&tval_after, NULL);
+
+        timersub(&tval_after, &tval_before, &tval_result);
+
+        printf("Time elapsed in calculating contact-based scores: %ld.%06ld\n",
+               (long int)tval_result.tv_sec, (long int)tval_result.tv_usec);
 
         free(prt1);
         free(prt2);
