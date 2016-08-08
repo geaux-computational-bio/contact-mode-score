@@ -96,7 +96,7 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    unsigned long int N = 10000000;
+    unsigned long int N = 1000000;
 
     if (rmsd_flag) {
         if (lig1_path.empty() || lig2_path.empty()) {
