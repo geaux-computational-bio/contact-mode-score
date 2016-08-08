@@ -1,0 +1,5 @@
+*.o
+/src/GPATH
+/src/GRTAGS
+/src/GTAGS
+/src/gtest_main.a
